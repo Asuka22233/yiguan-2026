@@ -1,0 +1,1500 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>仪光赤心·2026寒假</title>
+    <style>
+      /* =============== CSS Reset & Base =============== */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --red-deep: #8b0000;
+        --red-primary: #c41e3a;
+        --red-bright: #e63946;
+        --red-light: #ff6b6b;
+        --red-glow: #ff4444;
+        --gold: #d4a853;
+        --gold-light: #f0d68a;
+        --bg-dark: #0a0a0a;
+        --bg-card: #1a1115;
+        --bg-card-hover: #2a1520;
+        --text-primary: #f5f0eb;
+        --text-secondary: #b8a9a0;
+        --text-muted: #7a6a62;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family:
+          "PingFang SC",
+          "Microsoft YaHei",
+          -apple-system,
+          sans-serif;
+        background: var(--bg-dark);
+        color: var(--text-primary);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      /* =============== Scrollbar =============== */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg-dark);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--red-primary);
+        border-radius: 3px;
+      }
+
+      /* =============== Navigation =============== */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        padding: 16px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(10, 10, 10, 0.85);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(196, 30, 58, 0.15);
+        transition: all 0.3s ease;
+      }
+
+      .navbar.scrolled {
+        padding: 10px 40px;
+        background: rgba(10, 10, 10, 0.95);
+        border-bottom: 1px solid rgba(196, 30, 58, 0.3);
+      }
+
+      .nav-brand {
+        font-size: 1.3rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--red-bright), var(--gold));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: 2px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 32px;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        transition: color 0.3s;
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--red-primary);
+        transition: width 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: var(--text-primary);
+      }
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* =============== Hero Section =============== */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 80% 60% at 50% 40%,
+            rgba(196, 30, 58, 0.12) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 40% 40% at 20% 80%,
+            rgba(139, 0, 0, 0.08) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 40% 40% at 80% 20%,
+            rgba(212, 168, 83, 0.05) 0%,
+            transparent 60%
+          );
+        pointer-events: none;
+      }
+
+      /* Floating particles */
+      .particles {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--red-bright);
+        border-radius: 50%;
+        opacity: 0;
+        animation: floatUp linear infinite;
+      }
+
+      @keyframes floatUp {
+        0% {
+          opacity: 0;
+          transform: translateY(100vh) scale(0);
+        }
+        10% {
+          opacity: 0.8;
+        }
+        90% {
+          opacity: 0.3;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-10vh) scale(1);
+        }
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-badge {
+        display: inline-block;
+        padding: 6px 20px;
+        background: rgba(196, 30, 58, 0.15);
+        border: 1px solid rgba(196, 30, 58, 0.3);
+        border-radius: 50px;
+        font-size: 0.85rem;
+        color: var(--red-light);
+        letter-spacing: 2px;
+        margin-bottom: 24px;
+      }
+
+      .hero-title {
+        font-size: clamp(2.5rem, 7vw, 5rem);
+        font-weight: 900;
+        line-height: 1.15;
+        margin-bottom: 16px;
+        letter-spacing: 6px;
+      }
+
+      .hero-title .red {
+        background: linear-gradient(
+          135deg,
+          var(--red-bright),
+          var(--red-primary)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero-title .gold {
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        color: var(--text-secondary);
+        margin-bottom: 40px;
+        letter-spacing: 3px;
+      }
+
+      .hero-stats {
+        display: flex;
+        gap: 48px;
+        justify-content: center;
+        margin-bottom: 48px;
+      }
+
+      .stat {
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--red-bright);
+      }
+
+      .stat-label {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        letter-spacing: 1px;
+        margin-top: 4px;
+      }
+
+      .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 36px;
+        background: linear-gradient(
+          135deg,
+          var(--red-primary),
+          var(--red-deep)
+        );
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-size: 1rem;
+        letter-spacing: 2px;
+        transition: all 0.3s;
+        border: 1px solid rgba(255, 107, 107, 0.2);
+      }
+
+      .hero-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(196, 30, 58, 0.4);
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        animation: bounce 2s infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(8px);
+        }
+      }
+
+      .scroll-indicator .arrow {
+        width: 20px;
+        height: 20px;
+        border-right: 2px solid var(--red-primary);
+        border-bottom: 2px solid var(--red-primary);
+        transform: rotate(45deg);
+      }
+
+      /* =============== Section Titles =============== */
+      .section-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .section-tag {
+        display: inline-block;
+        padding: 4px 16px;
+        background: rgba(196, 30, 58, 0.1);
+        border: 1px solid rgba(196, 30, 58, 0.25);
+        border-radius: 50px;
+        font-size: 0.8rem;
+        color: var(--red-light);
+        letter-spacing: 2px;
+        margin-bottom: 16px;
+      }
+
+      .section-title {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 800;
+        background: linear-gradient(
+          135deg,
+          var(--text-primary),
+          var(--text-secondary)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: 3px;
+      }
+
+      .section-divider {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(to right, var(--red-primary), var(--gold));
+        margin: 16px auto 0;
+        border-radius: 2px;
+      }
+
+      /* =============== Scrolling Photo Wall =============== */
+      .photowall-section {
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .photowall-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: linear-gradient(to bottom, var(--bg-dark), transparent);
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      .photowall-section::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: linear-gradient(to top, var(--bg-dark), transparent);
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      .scroll-row {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 16px;
+        animation: scrollLeft linear infinite;
+        width: max-content;
+      }
+
+      .scroll-row:nth-child(even) {
+        animation-name: scrollRight;
+      }
+
+      .scroll-row:nth-child(1) {
+        animation-duration: 45s;
+      }
+      .scroll-row:nth-child(2) {
+        animation-duration: 55s;
+      }
+      .scroll-row:nth-child(3) {
+        animation-duration: 40s;
+      }
+      .scroll-row:nth-child(4) {
+        animation-duration: 50s;
+      }
+
+      @keyframes scrollLeft {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      @keyframes scrollRight {
+        0% {
+          transform: translateX(-50%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      .scroll-row:hover {
+        animation-play-state: paused;
+      }
+
+      .scroll-photo {
+        flex-shrink: 0;
+        width: 280px;
+        height: 200px;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        border: 1px solid rgba(196, 30, 58, 0.15);
+        transition: all 0.4s ease;
+      }
+
+      .scroll-photo:hover {
+        transform: scale(1.05);
+        border-color: var(--red-primary);
+        box-shadow: 0 8px 32px rgba(196, 30, 58, 0.3);
+        z-index: 3;
+      }
+
+      .scroll-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s;
+      }
+
+      .scroll-photo:hover img {
+        transform: scale(1.1);
+      }
+
+      .scroll-photo .overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(10, 10, 10, 0.9) 0%,
+          transparent 60%
+        );
+        opacity: 0;
+        transition: opacity 0.3s;
+        display: flex;
+        align-items: flex-end;
+        padding: 16px;
+      }
+
+      .scroll-photo:hover .overlay {
+        opacity: 1;
+      }
+
+      .overlay-text {
+        color: var(--text-primary);
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+      }
+
+      /* =============== Gallery Section =============== */
+      .gallery-section {
+        padding: 100px 40px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .gallery-filters {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 48px;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        padding: 8px 24px;
+        background: rgba(196, 30, 58, 0.08);
+        border: 1px solid rgba(196, 30, 58, 0.2);
+        border-radius: 50px;
+        color: var(--text-secondary);
+        cursor: pointer;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        transition: all 0.3s;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--red-primary);
+        color: white;
+        border-color: var(--red-primary);
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .gallery-card {
+        background: var(--bg-card);
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid rgba(196, 30, 58, 0.1);
+        transition: all 0.4s ease;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
+      .gallery-card:nth-child(1) {
+        animation-delay: 0.05s;
+      }
+      .gallery-card:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      .gallery-card:nth-child(3) {
+        animation-delay: 0.15s;
+      }
+      .gallery-card:nth-child(4) {
+        animation-delay: 0.2s;
+      }
+      .gallery-card:nth-child(5) {
+        animation-delay: 0.25s;
+      }
+      .gallery-card:nth-child(6) {
+        animation-delay: 0.3s;
+      }
+      .gallery-card:nth-child(7) {
+        animation-delay: 0.35s;
+      }
+      .gallery-card:nth-child(8) {
+        animation-delay: 0.4s;
+      }
+      .gallery-card:nth-child(9) {
+        animation-delay: 0.45s;
+      }
+      .gallery-card:nth-child(10) {
+        animation-delay: 0.5s;
+      }
+      .gallery-card:nth-child(11) {
+        animation-delay: 0.55s;
+      }
+      .gallery-card:nth-child(12) {
+        animation-delay: 0.6s;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .gallery-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(196, 30, 58, 0.4);
+        box-shadow: 0 16px 48px rgba(196, 30, 58, 0.15);
+      }
+
+      .gallery-card-img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        transition: transform 0.4s;
+      }
+
+      .gallery-card:hover .gallery-card-img {
+        transform: scale(1.05);
+      }
+
+      .gallery-card-img-wrap {
+        overflow: hidden;
+        position: relative;
+      }
+
+      .gallery-card-img-wrap::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 40px;
+        background: linear-gradient(to top, var(--bg-card), transparent);
+      }
+
+      .gallery-card-body {
+        padding: 20px;
+      }
+
+      .gallery-card-tag {
+        display: inline-block;
+        padding: 3px 10px;
+        background: rgba(196, 30, 58, 0.15);
+        border-radius: 50px;
+        font-size: 0.7rem;
+        color: var(--red-light);
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+      }
+
+      .gallery-card-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        letter-spacing: 1px;
+        color: var(--text-primary);
+      }
+
+      .gallery-card-desc {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .gallery-card-date {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .gallery-card-date::before {
+        content: "";
+        width: 16px;
+        height: 1px;
+        background: var(--red-primary);
+      }
+
+      /* =============== Modal / Lightbox =============== */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.92);
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal {
+        max-width: 900px;
+        width: 90%;
+        max-height: 90vh;
+        background: var(--bg-card);
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(196, 30, 58, 0.2);
+        transform: scale(0.9) translateY(20px);
+        transition: transform 0.4s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .modal-overlay.active .modal {
+        transform: scale(1) translateY(0);
+      }
+
+      .modal-img-wrap {
+        position: relative;
+        width: 100%;
+        max-height: 55vh;
+        overflow: hidden;
+      }
+
+      .modal-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+        z-index: 10;
+      }
+
+      .modal-close:hover {
+        background: var(--red-primary);
+        border-color: var(--red-primary);
+      }
+
+      .modal-body {
+        padding: 32px;
+        overflow-y: auto;
+      }
+
+      .modal-tag {
+        display: inline-block;
+        padding: 4px 14px;
+        background: rgba(196, 30, 58, 0.15);
+        border-radius: 50px;
+        font-size: 0.75rem;
+        color: var(--red-light);
+        letter-spacing: 1px;
+        margin-bottom: 14px;
+      }
+
+      .modal-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+        background: linear-gradient(
+          135deg,
+          var(--text-primary),
+          var(--text-secondary)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .modal-desc {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.8;
+        margin-bottom: 20px;
+      }
+
+      .modal-meta {
+        display: flex;
+        gap: 24px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(196, 30, 58, 0.1);
+      }
+
+      .modal-meta-item {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .modal-meta-item::before {
+        content: "";
+        width: 20px;
+        height: 2px;
+        background: var(--red-primary);
+        flex-shrink: 0;
+      }
+
+      .modal-meta-item span {
+        color: var(--gold);
+      }
+
+      /* =============== Navigation Arrows in Modal =============== */
+      .modal-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: white;
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+        z-index: 10;
+      }
+
+      .modal-nav:hover {
+        background: var(--red-primary);
+      }
+
+      .modal-prev {
+        left: 16px;
+      }
+      .modal-next {
+        right: 16px;
+      }
+
+      /* =============== Footer =============== */
+      .footer {
+        padding: 60px 40px 30px;
+        border-top: 1px solid rgba(196, 30, 58, 0.1);
+        text-align: center;
+      }
+
+      .footer-brand {
+        font-size: 1.2rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--red-bright), var(--gold));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: 3px;
+        margin-bottom: 12px;
+      }
+
+      .footer-desc {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+        margin-bottom: 24px;
+        letter-spacing: 1px;
+      }
+
+      .footer-line {
+        width: 60px;
+        height: 2px;
+        background: linear-gradient(to right, var(--red-primary), transparent);
+        margin: 0 auto 20px;
+      }
+
+      .footer-copy {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        letter-spacing: 1px;
+      }
+
+      /* =============== Quote Banner =============== */
+      .quote-banner {
+        padding: 80px 40px;
+        text-align: center;
+        position: relative;
+        background: linear-gradient(
+          135deg,
+          rgba(139, 0, 0, 0.15),
+          rgba(10, 10, 10, 1)
+        );
+      }
+
+      .quote-banner::before {
+        content: "✦";
+        display: block;
+        font-size: 1.5rem;
+        color: var(--red-primary);
+        margin-bottom: 24px;
+      }
+
+      .quote-text {
+        font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+        font-weight: 600;
+        color: var(--text-primary);
+        letter-spacing: 3px;
+        line-height: 1.8;
+        max-width: 700px;
+        margin: 0 auto 16px;
+      }
+
+      .quote-author {
+        font-size: 0.85rem;
+        color: var(--gold);
+        letter-spacing: 2px;
+      }
+
+      /* =============== Responsive =============== */
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 12px 20px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .hero-stats {
+          gap: 24px;
+        }
+        .gallery-section {
+          padding: 60px 16px;
+        }
+        .gallery-grid {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 12px;
+        }
+        .scroll-photo {
+          width: 220px;
+          height: 160px;
+        }
+        .modal {
+          width: 95%;
+        }
+        .modal-body {
+          padding: 20px;
+        }
+      }
+
+      /* =============== Loading Animation =============== */
+      .loading-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: var(--bg-dark);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition:
+          opacity 0.6s,
+          visibility 0.6s;
+      }
+
+      .loading-screen.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .loading-ring {
+        width: 48px;
+        height: 48px;
+        border: 3px solid rgba(196, 30, 58, 0.15);
+        border-top-color: var(--red-primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 20px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading-text {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        letter-spacing: 3px;
+      }
+
+      /* =============== Back to Top =============== */
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 44px;
+        height: 44px;
+        background: var(--red-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        border: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+        z-index: 900;
+        box-shadow: 0 4px 16px rgba(196, 30, 58, 0.4);
+      }
+
+      .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(196, 30, 58, 0.5);
+      }
+
+      /* =============== Projects Section =============== */
+      .projects-section {
+        padding: 100px 40px 80px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 28px;
+      }
+
+      .project-card {
+        background: linear-gradient(160deg, #1e0c10, #1a0a0f);
+        border-radius: 20px;
+        border: 1px solid rgba(196, 30, 58, 0.25);
+        padding: 36px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+
+      .project-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(to right, var(--red-bright), var(--gold));
+        opacity: 0.6;
+        transition: opacity 0.3s;
+      }
+
+      .project-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 80% 60% at 50% 0%,
+          rgba(196, 30, 58, 0.08) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .project-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(230, 57, 70, 0.5);
+        box-shadow:
+          0 16px 48px rgba(196, 30, 58, 0.2),
+          0 0 40px rgba(196, 30, 58, 0.06);
+      }
+
+      .project-card:hover::before {
+        opacity: 1;
+      }
+
+      .project-card-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+        text-align: center;
+        background: linear-gradient(135deg, #ff8a8a, var(--red-bright));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        position: relative;
+        z-index: 1;
+      }
+
+      .project-card-desc {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.85rem;
+        color: var(--red-light);
+        letter-spacing: 1px;
+        transition: gap 0.3s;
+        position: relative;
+        z-index: 1;
+      }
+
+      .project-card:hover .project-link {
+        gap: 12px;
+      }
+
+      .project-link-arrow {
+        transition: transform 0.3s;
+      }
+
+      .project-card:hover .project-link-arrow {
+        transform: translateX(4px);
+      }
+
+      @media (max-width: 768px) {
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+        .projects-section {
+          padding: 60px 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+      <div class="loading-ring"></div>
+      <div class="loading-text">仪光赤心 · 加载中</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-brand">仪光赤心</div>
+      <ul class="nav-links">
+        <li><a href="#hero">首页</a></li>
+        <li><a href="#photowall">照片墙</a></li>
+        <li><a href="#gallery">全部照片</a></li>
+        <li><a href="#projects">研究成果</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="particles" id="particles"></div>
+      <div class="hero-content">
+        <div class="hero-badge">✦ 仪光赤心实践队 ✦</div>
+        <h1 class="hero-title">
+          <span class="red">仪光赤心</span><br />
+          <span class="gold">2026 寒假</span>
+        </h1>
+        <p class="hero-subtitle">传承红色基因 · 凝聚青春力量</p>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-number" id="photoCount">24</div>
+            <div class="stat-label">精选照片</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">7</div>
+            <div class="stat-label">实践天数</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">12</div>
+            <div class="stat-label">队伍成员</div>
+          </div>
+        </div>
+        <a href="#photowall" class="hero-cta">浏览照片墙 ↓</a>
+      </div>
+      <div class="scroll-indicator">
+        <span>向下滚动</span>
+        <div class="arrow"></div>
+      </div>
+    </section>
+
+    <!-- Scrolling Photo Wall -->
+    <section class="photowall-section" id="photowall">
+      <div class="section-header" style="padding: 0 40px; margin-bottom: 40px">
+        <div class="section-tag">✦ PHOTO WALL</div>
+        <h2 class="section-title">照片墙</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div id="scrollWall"></div>
+    </section>
+
+    <!-- Quote Banner -->
+    <section class="quote-banner" id="quote">
+      <div class="quote-text">
+        "赤心向党，仪光照亮前行之路；<br />红色基因，在实践中薪火相传。"
+      </div>
+      <div class="quote-author">—— 仪光赤心实践队</div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+      <div class="section-header">
+        <div class="section-tag">✦ ALL PHOTOS</div>
+        <h2 class="section-title">全部照片</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="gallery-filters">
+        <button class="filter-btn active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="实践活动">实践活动</button>
+        <button class="filter-btn" data-filter="红色教育">红色教育</button>
+        <button class="filter-btn" data-filter="团队风采">团队风采</button>
+        <button class="filter-btn" data-filter="社区服务">社区服务</button>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section" id="projects">
+      <div class="section-header">
+        <div class="section-tag">✦ OUR PROJECTS</div>
+        <h2 class="section-title">实践研究成果</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="projects-grid">
+        <a
+          class="project-card"
+          href="https://asuka22233.github.io/hs-dhua/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="project-card-title">AI 红色时光对话机</div>
+          <div class="project-card-desc">
+            基于 AI
+            大模型角色扮演技术，让革命先烈"开口说话"。选择一位福建革命先烈，以第一人称实时对话，跨越时空感受革命先辈的精神力量。支持生成对话纪念卡片，轻松分享传播红色精神。
+          </div>
+          <div class="project-link">
+            <span>访问项目</span>
+            <span class="project-link-arrow">→</span>
+          </div>
+        </a>
+        <a
+          class="project-card"
+          href="https://asuka22233.github.io/hs-text/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="project-card-title">红色文化地图</div>
+          <div class="project-card-desc">
+            交互式福建红色文化地图，标注全省各地红色景点与革命遗址。部分地点为仪光赤心实践队2026寒假实地走访的地方，包括古田会议纪念馆、福建省革命历史纪念馆、三坊七巷等多处红色地标。
+          </div>
+          <div class="project-link">
+            <span>访问项目</span>
+            <span class="project-link-arrow">→</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-brand">仪光赤心 · 2026寒假</div>
+      <div class="footer-desc">
+        传承红色基因 · 凝聚青春力量 · 数字化创新实践
+      </div>
+      <div class="footer-line"></div>
+      <div class="footer-copy">© 2026 仪光赤心实践队 · All Rights Reserved</div>
+    </footer>
+
+    <!-- Modal / Lightbox -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+        <div class="modal-img-wrap">
+          <img class="modal-img" id="modalImg" src="" alt="" />
+          <button class="modal-close" id="modalClose">✕</button>
+          <button class="modal-nav modal-prev" id="modalPrev">‹</button>
+          <button class="modal-nav modal-next" id="modalNext">›</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-tag" id="modalTag"></div>
+          <h3 class="modal-title" id="modalTitle"></h3>
+          <p class="modal-desc" id="modalDesc"></p>
+          <div class="modal-meta">
+            <div class="modal-meta-item"><span id="modalDate"></span></div>
+            <div class="modal-meta-item"><span id="modalLocation"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">↑</button>
+
+    <script src="photos.js"></script>
+    <script>
+      // ==================== Loading Screen ====================
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          document.getElementById("loadingScreen").classList.add("hidden");
+        }, 800);
+      });
+
+      // ==================== Particles ====================
+      function createParticles() {
+        const container = document.getElementById("particles");
+        for (let i = 0; i < 30; i++) {
+          const p = document.createElement("div");
+          p.className = "particle";
+          p.style.left = Math.random() * 100 + "%";
+          p.style.animationDuration = 6 + Math.random() * 10 + "s";
+          p.style.animationDelay = Math.random() * 8 + "s";
+          p.style.width = p.style.height = 2 + Math.random() * 4 + "px";
+          if (Math.random() > 0.7) p.style.background = "#D4A853";
+          container.appendChild(p);
+        }
+      }
+      createParticles();
+
+      // ==================== Navbar Scroll Effect ====================
+      window.addEventListener("scroll", () => {
+        const navbar = document.getElementById("navbar");
+        navbar.classList.toggle("scrolled", window.scrollY > 50);
+
+        const btn = document.getElementById("backToTop");
+        btn.classList.toggle("visible", window.scrollY > 600);
+      });
+
+      document.getElementById("backToTop").addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // ==================== Scrolling Photo Wall ====================
+      function buildScrollWall() {
+        const container = document.getElementById("scrollWall");
+        const rowCount = 4;
+        const photosPerRow = 10;
+
+        for (let r = 0; r < rowCount; r++) {
+          const row = document.createElement("div");
+          row.className = "scroll-row";
+
+          // Create double items for infinite scroll illusion
+          const shuffled = [...photos].sort(() => Math.random() - 0.5);
+          const selected = [];
+          for (let i = 0; i < photosPerRow; i++) {
+            selected.push(shuffled[i % shuffled.length]);
+          }
+          const doubled = [...selected, ...selected]; // duplicate for seamless loop
+
+          doubled.forEach((photo) => {
+            const item = document.createElement("div");
+            item.className = "scroll-photo";
+            item.innerHTML = `
+                        <img src="${photo.src}" alt="${photo.title}" loading="lazy">
+                        <div class="overlay">
+                            <span class="overlay-text">${photo.title}</span>
+                        </div>
+                    `;
+            item.addEventListener("click", () => openModal(photo.id));
+            row.appendChild(item);
+          });
+
+          container.appendChild(row);
+        }
+      }
+      buildScrollWall();
+
+      // ==================== Gallery ====================
+      let currentFilter = "all";
+
+      function renderGallery(filter) {
+        const grid = document.getElementById("galleryGrid");
+        grid.innerHTML = "";
+        const filtered =
+          filter === "all" ? photos : photos.filter((p) => p.tag === filter);
+
+        filtered.forEach((photo, index) => {
+          const card = document.createElement("div");
+          card.className = "gallery-card";
+          card.style.animationDelay = index * 0.05 + "s";
+          card.innerHTML = `
+                    <div class="gallery-card-img-wrap">
+                        <img class="gallery-card-img" src="${photo.src}" alt="${photo.title}" loading="lazy">
+                    </div>
+                    <div class="gallery-card-body">
+                        <div class="gallery-card-tag">${photo.tag}</div>
+                        <div class="gallery-card-title">${photo.title}</div>
+                        <div class="gallery-card-desc">${photo.desc}</div>
+                        <div class="gallery-card-date">${photo.date}</div>
+                    </div>
+                `;
+          card.addEventListener("click", () => openModal(photo.id));
+          grid.appendChild(card);
+        });
+      }
+
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          renderGallery(currentFilter);
+        });
+      });
+
+      renderGallery("all");
+
+      // ==================== Modal ====================
+      let currentModalIndex = 0;
+      let modalPhotos = photos;
+
+      function openModal(id) {
+        modalPhotos =
+          currentFilter === "all"
+            ? photos
+            : photos.filter((p) => p.tag === currentFilter);
+        currentModalIndex = modalPhotos.findIndex((p) => p.id === id);
+        if (currentModalIndex === -1) {
+          modalPhotos = photos;
+          currentModalIndex = photos.findIndex((p) => p.id === id);
+        }
+        showModalContent();
+        document.getElementById("modalOverlay").classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function showModalContent() {
+        const photo = modalPhotos[currentModalIndex];
+        document.getElementById("modalImg").src = photo.src;
+        document.getElementById("modalImg").alt = photo.title;
+        document.getElementById("modalTag").textContent = photo.tag;
+        document.getElementById("modalTitle").textContent = photo.title;
+        document.getElementById("modalDesc").textContent = photo.desc;
+        document.getElementById("modalDate").textContent = photo.date;
+        document.getElementById("modalLocation").textContent = photo.location;
+      }
+
+      function closeModal() {
+        document.getElementById("modalOverlay").classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      document
+        .getElementById("modalClose")
+        .addEventListener("click", closeModal);
+      document.getElementById("modalOverlay").addEventListener("click", (e) => {
+        if (e.target === document.getElementById("modalOverlay")) closeModal();
+      });
+
+      document.getElementById("modalPrev").addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentModalIndex =
+          (currentModalIndex - 1 + modalPhotos.length) % modalPhotos.length;
+        showModalContent();
+      });
+
+      document.getElementById("modalNext").addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentModalIndex = (currentModalIndex + 1) % modalPhotos.length;
+        showModalContent();
+      });
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (
+          !document.getElementById("modalOverlay").classList.contains("active")
+        )
+          return;
+        if (e.key === "Escape") closeModal();
+        if (e.key === "ArrowLeft") {
+          currentModalIndex =
+            (currentModalIndex - 1 + modalPhotos.length) % modalPhotos.length;
+          showModalContent();
+        }
+        if (e.key === "ArrowRight") {
+          currentModalIndex = (currentModalIndex + 1) % modalPhotos.length;
+          showModalContent();
+        }
+      });
+    </script>
+  </body>
+</html>
