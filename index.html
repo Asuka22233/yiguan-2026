@@ -49,6 +49,12 @@
         width: 100%;
       }
 
+      .page-wrapper {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+      }
+
       /* =============== Scrollbar =============== */
       ::-webkit-scrollbar {
         width: 6px;
@@ -1341,166 +1347,176 @@
     </style>
   </head>
   <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-      <div class="loading-ring"></div>
-      <div class="loading-text">仪光赤心 · 加载中</div>
-    </div>
+    <div class="page-wrapper">
+      <!-- Loading Screen -->
+      <div class="loading-screen" id="loadingScreen">
+        <div class="loading-ring"></div>
+        <div class="loading-text">仪光赤心 · 加载中</div>
+      </div>
 
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-      <div class="nav-brand">仪光赤心</div>
-      <button class="nav-toggle" id="navToggle" aria-label="菜单">☰</button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#hero">首页</a></li>
-        <li><a href="#photowall">照片墙</a></li>
-        <li><a href="#gallery">全部照片</a></li>
-        <li><a href="#projects">更多研究成果</a></li>
-      </ul>
-    </nav>
+      <!-- Navigation -->
+      <nav class="navbar" id="navbar">
+        <div class="nav-brand">仪光赤心</div>
+        <button class="nav-toggle" id="navToggle" aria-label="菜单">☰</button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#hero">首页</a></li>
+          <li><a href="#photowall">照片墙</a></li>
+          <li><a href="#gallery">全部照片</a></li>
+          <li><a href="#projects">更多研究成果</a></li>
+        </ul>
+      </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-      <div class="particles" id="particles"></div>
-      <div class="hero-content">
-        <div class="hero-badge">✦ 仪光赤心实践队 ✦</div>
-        <h1 class="hero-title">
-          <span class="red">仪光赤心</span><br />
-          <span class="gold">2026 寒假</span>
-        </h1>
-        <p class="hero-subtitle">传承红色基因 · 凝聚青春力量</p>
-        <div class="hero-stats">
-          <div class="stat">
-            <div class="stat-number" id="photoCount">24</div>
-            <div class="stat-label">精选照片</div>
+      <!-- Hero Section -->
+      <section class="hero" id="hero">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+          <div class="hero-badge">✦ 仪光赤心实践队 ✦</div>
+          <h1 class="hero-title">
+            <span class="red">仪光赤心</span><br />
+            <span class="gold">2026 寒假</span>
+          </h1>
+          <p class="hero-subtitle">传承红色基因 · 凝聚青春力量</p>
+          <div class="hero-stats">
+            <div class="stat">
+              <div class="stat-number" id="photoCount">24</div>
+              <div class="stat-label">精选照片</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">8</div>
+              <div class="stat-label">实践天数</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">21</div>
+              <div class="stat-label">队伍成员</div>
+            </div>
           </div>
-          <div class="stat">
-            <div class="stat-number">8</div>
-            <div class="stat-label">实践天数</div>
-          </div>
-          <div class="stat">
-            <div class="stat-number">21</div>
-            <div class="stat-label">队伍成员</div>
-          </div>
+          <a href="#photowall" class="hero-cta">浏览照片墙 ↓</a>
         </div>
-        <a href="#photowall" class="hero-cta">浏览照片墙 ↓</a>
-      </div>
-      <div class="scroll-indicator">
-        <span>向下滚动</span>
-        <div class="arrow"></div>
-      </div>
-    </section>
+        <div class="scroll-indicator">
+          <span>向下滚动</span>
+          <div class="arrow"></div>
+        </div>
+      </section>
 
-    <!-- Scrolling Photo Wall -->
-    <section class="photowall-section" id="photowall">
-      <div class="section-header" style="padding: 0 40px; margin-bottom: 40px">
-        <div class="section-tag">✦ PHOTO WALL</div>
-        <h2 class="section-title">照片展示</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div id="scrollWall"></div>
-    </section>
-
-    <!-- Quote Banner -->
-    <section class="quote-banner" id="quote">
-      <div class="quote-text">
-        "赤心向党，仪光照亮前行之路；<br />红色基因，在实践中薪火相传。"
-      </div>
-      <div class="quote-author">—— 仪光赤心实践队</div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section class="gallery-section" id="gallery">
-      <div class="section-header">
-        <div class="section-tag">✦ ALL PHOTOS</div>
-        <h2 class="section-title">全部照片</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="gallery-filters">
-        <button class="filter-btn active" data-filter="all">全部</button>
-        <button class="filter-btn" data-filter="实践活动">实践活动</button>
-        <button class="filter-btn" data-filter="红色教育">红色教育</button>
-        <button class="filter-btn" data-filter="团队风采">团队风采</button>
-        <button class="filter-btn" data-filter="社区服务">社区服务</button>
-      </div>
-      <div class="gallery-grid" id="galleryGrid"></div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="projects-section" id="projects">
-      <div class="section-header">
-        <div class="section-tag">✦ OUR PROJECTS</div>
-        <h2 class="section-title">实践研究成果</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="projects-grid">
-        <a
-          class="project-card"
-          href="https://asuka22233.github.io/hs-dhua/"
-          target="_blank"
-          rel="noopener noreferrer"
+      <!-- Scrolling Photo Wall -->
+      <section class="photowall-section" id="photowall">
+        <div
+          class="section-header"
+          style="padding: 0 40px; margin-bottom: 40px"
         >
-          <div class="project-card-title">AI 红色时光对话机</div>
-          <div class="project-card-desc">
-            基于 AI
-            大模型角色扮演技术，让革命先烈"开口说话"。选择一位福建革命先烈，以第一人称实时对话，跨越时空感受革命先辈的精神力量。支持生成对话纪念卡片，轻松分享传播红色精神。
-          </div>
-          <div class="project-link">
-            <span>访问项目</span>
-            <span class="project-link-arrow">→</span>
-          </div>
-        </a>
-        <a
-          class="project-card"
-          href="https://asuka22233.github.io/hs-text/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div class="project-card-title">红色文化地图</div>
-          <div class="project-card-desc">
-            交互式福建红色文化地图，标注全省各地红色景点与革命遗址。部分地点为仪光赤心实践队2026寒假实地走访的地方，包括古田会议纪念馆、福建省革命历史纪念馆、三坊七巷等多处红色地标。
-          </div>
-          <div class="project-link">
-            <span>访问项目</span>
-            <span class="project-link-arrow">→</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-brand">仪光赤心 · 2026寒假</div>
-      <div class="footer-desc">
-        传承红色基因 · 凝聚青春力量 · 数字化创新实践
-      </div>
-      <div class="footer-line"></div>
-      <div class="footer-copy">© 2026 仪光赤心实践队 · All Rights Reserved</div>
-    </footer>
-
-    <!-- Modal / Lightbox -->
-    <div class="modal-overlay" id="modalOverlay">
-      <div class="modal">
-        <div class="modal-img-wrap">
-          <img class="modal-img" id="modalImg" src="" alt="" />
-          <button class="modal-close" id="modalClose">✕</button>
-          <button class="modal-nav modal-prev" id="modalPrev">‹</button>
-          <button class="modal-nav modal-next" id="modalNext">›</button>
+          <div class="section-tag">✦ PHOTO WALL</div>
+          <h2 class="section-title">照片展示</h2>
+          <div class="section-divider"></div>
         </div>
-        <div class="modal-body">
-          <div class="modal-tag" id="modalTag"></div>
-          <h3 class="modal-title" id="modalTitle"></h3>
-          <p class="modal-desc" id="modalDesc"></p>
-          <div class="modal-meta">
-            <div class="modal-meta-item"><span id="modalDate"></span></div>
-            <div class="modal-meta-item"><span id="modalLocation"></span></div>
+        <div id="scrollWall"></div>
+      </section>
+
+      <!-- Quote Banner -->
+      <section class="quote-banner" id="quote">
+        <div class="quote-text">
+          "赤心向党，仪光照亮前行之路；<br />红色基因，在实践中薪火相传。"
+        </div>
+        <div class="quote-author">—— 仪光赤心实践队</div>
+      </section>
+
+      <!-- Gallery Section -->
+      <section class="gallery-section" id="gallery">
+        <div class="section-header">
+          <div class="section-tag">✦ ALL PHOTOS</div>
+          <h2 class="section-title">全部照片</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="gallery-filters">
+          <button class="filter-btn active" data-filter="all">全部</button>
+          <button class="filter-btn" data-filter="实践活动">实践活动</button>
+          <button class="filter-btn" data-filter="红色教育">红色教育</button>
+          <button class="filter-btn" data-filter="团队风采">团队风采</button>
+          <button class="filter-btn" data-filter="社区服务">社区服务</button>
+        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+      </section>
+
+      <!-- Projects Section -->
+      <section class="projects-section" id="projects">
+        <div class="section-header">
+          <div class="section-tag">✦ OUR PROJECTS</div>
+          <h2 class="section-title">实践研究成果</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="projects-grid">
+          <a
+            class="project-card"
+            href="https://asuka22233.github.io/hs-dhua/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="project-card-title">AI 红色时光对话机</div>
+            <div class="project-card-desc">
+              基于 AI
+              大模型角色扮演技术，让革命先烈"开口说话"。选择一位福建革命先烈，以第一人称实时对话，跨越时空感受革命先辈的精神力量。支持生成对话纪念卡片，轻松分享传播红色精神。
+            </div>
+            <div class="project-link">
+              <span>访问项目</span>
+              <span class="project-link-arrow">→</span>
+            </div>
+          </a>
+          <a
+            class="project-card"
+            href="https://asuka22233.github.io/hs-text/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="project-card-title">红色文化地图</div>
+            <div class="project-card-desc">
+              交互式福建红色文化地图，标注全省各地红色景点与革命遗址。部分地点为仪光赤心实践队2026寒假实地走访的地方，包括古田会议纪念馆、福建省革命历史纪念馆、三坊七巷等多处红色地标。
+            </div>
+            <div class="project-link">
+              <span>访问项目</span>
+              <span class="project-link-arrow">→</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-brand">仪光赤心 · 2026寒假</div>
+        <div class="footer-desc">
+          传承红色基因 · 凝聚青春力量 · 数字化创新实践
+        </div>
+        <div class="footer-line"></div>
+        <div class="footer-copy">
+          © 2026 仪光赤心实践队 · All Rights Reserved
+        </div>
+      </footer>
+
+      <!-- Modal / Lightbox -->
+      <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+          <div class="modal-img-wrap">
+            <img class="modal-img" id="modalImg" src="" alt="" />
+            <button class="modal-close" id="modalClose">✕</button>
+            <button class="modal-nav modal-prev" id="modalPrev">‹</button>
+            <button class="modal-nav modal-next" id="modalNext">›</button>
+          </div>
+          <div class="modal-body">
+            <div class="modal-tag" id="modalTag"></div>
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <p class="modal-desc" id="modalDesc"></p>
+            <div class="modal-meta">
+              <div class="modal-meta-item"><span id="modalDate"></span></div>
+              <div class="modal-meta-item">
+                <span id="modalLocation"></span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Back to Top -->
+      <button class="back-to-top" id="backToTop">↑</button>
     </div>
-
-    <!-- Back to Top -->
-    <button class="back-to-top" id="backToTop">↑</button>
+    <!-- /.page-wrapper -->
 
     <script src="photos.js"></script>
     <script>
