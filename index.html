@@ -415,13 +415,14 @@
       .scroll-row {
         display: flex;
         gap: 16px;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
         animation: scrollLeft linear infinite;
         width: max-content;
       }
 
       .scroll-row:nth-child(even) {
         animation-name: scrollRight;
+        padding-left: 148px; /* offset half a photo width for brick-wall effect */
       }
 
       .scroll-row:nth-child(1) {
@@ -1019,7 +1020,10 @@
         }
         .scroll-row {
           gap: 10px;
-          margin-bottom: 10px;
+          margin-bottom: 8px;
+        }
+        .scroll-row:nth-child(even) {
+          padding-left: 105px;
         }
         .quote-banner {
           padding: 50px 20px;
@@ -1554,17 +1558,22 @@
         const container = document.getElementById("scrollWall");
         const rowCount = 4;
         const photosPerRow = 10;
+        const usedIds = new Set(); // track used photo ids to reduce adjacent row repetition
 
         for (let r = 0; r < rowCount; r++) {
           const row = document.createElement("div");
           row.className = "scroll-row";
 
-          // Create double items for infinite scroll illusion
+          // Prefer photos not used in the previous row
           const shuffled = [...photos].sort(() => Math.random() - 0.5);
-          const selected = [];
-          for (let i = 0; i < photosPerRow; i++) {
-            selected.push(shuffled[i % shuffled.length]);
-          }
+          const preferred = shuffled.filter((p) => !usedIds.has(p.id));
+          const pool = preferred.length >= photosPerRow ? preferred : shuffled;
+          const selected = pool.slice(0, photosPerRow);
+
+          // Update tracking: clear previous row, record current
+          usedIds.clear();
+          selected.forEach((p) => usedIds.add(p.id));
+
           const doubled = [...selected, ...selected]; // duplicate for seamless loop
 
           doubled.forEach((photo) => {
