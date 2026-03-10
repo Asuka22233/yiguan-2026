@@ -1113,19 +1113,22 @@
         }
         .projects-section {
           padding: 60px 16px;
-          width: 100%;
-          max-width: 100%;
-          overflow: hidden;
+          width: auto;
+          max-width: none;
+          margin-left: 16px;
+          margin-right: 16px;
+          padding-left: 0;
+          padding-right: 0;
         }
         .projects-grid {
           grid-template-columns: 1fr;
           gap: 16px;
-          max-width: 100%;
         }
         .project-card {
           padding: 24px;
           border-radius: 14px;
-          max-width: 100%;
+          width: 100%;
+          box-sizing: border-box;
         }
         .project-card-title {
           font-size: 1.05rem;
